@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Этап 3. Управление полётом</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="5" cy="5" r="2.4" stroke="#E8D08A" stroke-width="1.4"/><circle cx="19" cy="5" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <circle cx="5" cy="19" r="2.4" stroke="#E8D08A" stroke-width="1.4"/><circle cx="19" cy="19" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="6.6" y1="6.6" x2="10.3" y2="10.3" stroke="#E8D08A" stroke-width="1.4"/><line x1="17.4" y1="6.6" x2="13.7" y2="10.3" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="6.6" y1="17.4" x2="10.3" y2="13.7" stroke="#E8D08A" stroke-width="1.4"/><line x1="17.4" y1="17.4" x2="13.7" y2="13.7" stroke="#E8D08A" stroke-width="1.4"/>
+        <rect x="10" y="10" width="4" height="4" rx="0.6" fill="#E8D08A"/>
+      </svg>
+      <span class="brand-text">Проектирование интеллектуальных систем управления<small>БПЛА-мониторинг пшеничного поля · ИИ</small></span>
+    </a>
+    <span class="header-tag">Этап 3 из 7</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <nav class="stepper" aria-label="Этапы">
+    <ul class="stepper-track">
+      <li><a href="etap1.html"><span class="step-dot">1</span>Данные</a></li>
+      <li><a href="etap2.html"><span class="step-dot">2</span>Траектория</a></li>
+      <li><a href="etap3.html"><span class="step-dot">3</span>Полёт</a></li>
+      <li><a href="etap4.html"><span class="step-dot">4</span>Объекты</a></li>
+      <li><a href="etap5.html"><span class="step-dot">5</span>Карта</a></li>
+      <li><a href="etap6.html"><span class="step-dot">6</span>Координаты</a></li>
+      <li><a href="etap7.html"><span class="step-dot">7</span>Решения</a></li>
+    </ul>
+  </nav>
+
+  <h1>Этап 3. Управление полётом</h1>
+  <p class="lead">Пока дрон движется по рассчитанной траектории, системе нужно удерживать его на курсе в реальном времени и реагировать на порывы ветра или отклонения.</p>
+
+  
+  <div class="panel">
+    <h2>Что делает этот этап</h2>
+    <p>Управление движением дрона в реальном времени: поддержание скорости, высоты и курса, заданных на Этапе 2.</p>
+  </div>
+  <div class="panel gold">
+    <h2>Выполняемые задачи</h2>
+    <ul class="tasklist">
+      <li><strong>Алгоритмы PID</strong> — классический регулятор: по ошибке между нужным и текущим положением рассчитывает коррекцию тяги моторов.</li>
+      <li><strong>Алгоритмы PPO</strong> (Proximal Policy Optimization) — обученная с подкреплением политика управления, лучше справляется с нестандартными условиями (порывы ветра, резкие манёвры).</li>
+      <li>Коррекция скорости и направления по данным текущего этапа и предыдущего (GPS, карта).</li>
+      <li>Манёврирование — обход препятствий, обнаруженных на Этапе 4, без остановки полёта.</li>
+    </ul>
+  </div>
+  <div class="panel soil">
+    <h2>На практике</h2>
+    <p>Для равномерного облёта ровного участка пшеничного поля достаточно PID-регулятора. PPO подключается там, где нужно гибко реагировать на вновь обнаруженные препятствия или резко меняющийся ветер.</p>
+  </div>
+  
+
+  <div class="stage-nav">
+    <a href="etap2.html"><span class="lbl">Назад</span>← Этап 2. Генерация траектории</a>
+    <a href="etap4.html"><span class="lbl">Далее</span>Этап 4. Обнаружение объектов →</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">Ержанов Мейрам, группа 25-16 · Kazakh Agrotechnical University им. С. Сейфуллина</div>
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

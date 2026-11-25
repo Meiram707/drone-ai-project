@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Интеллектуальная система управления БПЛА — Проект</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="5" cy="5" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <circle cx="19" cy="5" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <circle cx="5" cy="19" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <circle cx="19" cy="19" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="6.6" y1="6.6" x2="10.3" y2="10.3" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="17.4" y1="6.6" x2="13.7" y2="10.3" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="6.6" y1="17.4" x2="10.3" y2="13.7" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="17.4" y1="17.4" x2="13.7" y2="13.7" stroke="#E8D08A" stroke-width="1.4"/>
+        <rect x="10" y="10" width="4" height="4" rx="0.6" fill="#E8D08A"/>
+      </svg>
+      <span class="brand-text">Проектирование интеллектуальных систем управления
+        <small>БПЛА-мониторинг пшеничного поля · ИИ</small>
+      </span>
+    </a>
+    <span class="header-tag">7 этапов обработки данных</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <h1>Интеллектуальное управление БПЛА при мониторинге поля</h1>
+    <p class="lead">
+      Дрон облетает пшеничное поле в Акмолинской области, снимает его
+      мультиспектральной камерой и собирает координаты GPS. Система,
+      описанная на этой странице, проводит эти данные через семь этапов —
+      от подготовки кадров до решения, нужен ли повторный снимок участка,
+      у которого упал индекс NDVI.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>Входные данные</h2>
+    <p>Прежде чем данные попадут в обработку, система получает три потока:</p>
+    <ul class="tasklist">
+      <li><strong>Поток данных с камеры</strong> — обычное и мультиспектральное изображение участка.</li>
+      <li><strong>Карта, положение, цель</strong> — текущий полигон поля и точка, которую нужно обследовать.</li>
+      <li><strong>Данные GPS</strong> — координаты дрона в момент съёмки.</li>
+    </ul>
+  </section>
+
+  <section class="field-path" aria-label="Семь этапов обработки">
+    <h2>Путь данных через систему</h2>
+    <p class="sub">Каждый узел — отдельный этап со своей страницей: алгоритмами, задачами и разбором примера на пшеничном поле.</p>
+    <div class="path-grid">
+
+      <a class="path-node" href="etap1.html">
+        <span class="n">Этап 1</span>
+        <h3>Подготовка данных и ПО</h3>
+        <p>Приём кадров с камеры и GPS, фильтрация шума, нормализация.</p>
+      </a>
+
+      <a class="path-node" href="etap2.html">
+        <span class="n">Этап 2</span>
+        <h3>Генерация траектории</h3>
+        <p>Расчёт маршрута облёта поля с учётом препятствий.</p>
+      </a>
+
+      <a class="path-node" href="etap3.html">
+        <span class="n">Этап 3</span>
+        <h3>Управление полётом</h3>
+        <p>PID / PPO-алгоритмы для коррекции скорости и курса в реальном времени.</p>
+      </a>
+
+      <a class="path-node" href="etap4.html">
+        <span class="n">Этап 4</span>
+        <h3>Обнаружение объектов</h3>
+        <p>YOLOv8 находит объекты и препятствия, определяет их координаты.</p>
+      </a>
+
+      <a class="path-node" href="etap5.html">
+        <span class="n">Этап 5</span>
+        <h3>Построение карты</h3>
+        <p>SLAM собирает 2D/3D карту поля с наложением траектории дрона.</p>
+      </a>
+
+      <a class="path-node" href="etap6.html">
+        <span class="n">Этап 6</span>
+        <h3>Изменение координат</h3>
+        <p>Перевод GPS в локальную систему координат, геодезические расчёты.</p>
+      </a>
+
+      <a class="path-node" href="etap7.html">
+        <span class="n">Этап 7</span>
+        <h3>Принятие решений</h3>
+        <p>Анализ NDVI и запуск калькулятора — нужен ли повторный снимок.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="ai-table-wrap">
+      <table class="ai-table">
+        <caption>Методы ИИ, применяемые в системе</caption>
+        <thead>
+          <tr><th>№</th><th>Класс методов ИИ</th><th>Используемый алгоритм</th><th>Назначение / тип задачи</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td><td>Машинное обучение (ML)</td>
+            <td>Линейная / полиномиальная регрессия, SVM</td>
+            <td>Прогнозирование параметров и трендов развития посевов</td>
+          </tr>
+          <tr>
+            <td>2</td><td>Глубокое обучение (DL)</td>
+            <td>Свёрточные и рекуррентные нейросети (CNN–LSTM)</td>
+            <td>Анализ временных рядов, прогноз природных процессов</td>
+          </tr>
+          <tr>
+            <td>3</td><td>Деревья решений</td>
+            <td>Decision Tree, Random Forest, XGBoost</td>
+            <td>Классификация данных ДЗЗ и ГИС, подбор оптимальных параметров</td>
+          </tr>
+          <tr>
+            <td>4</td><td>Нечёткая логика (Fuzzy Logic)</td>
+            <td>Нечёткие правила, система Мамдани</td>
+            <td>Оценка неопределённости, моделирование экспертных решений</td>
+          </tr>
+          <tr>
+            <td>5</td><td>Гибридные подходы (AI + EKF)</td>
+            <td>CNN–LSTM + расширенный фильтр Калмана (EKF)</td>
+            <td>Повышение устойчивости и точности моделей</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    Проектирование интеллектуальных систем управления · веб-приложение, 7 этапов.<br>
+    Ержанов Мейрам, группа 25-16 · Kazakh Agrotechnical University им. С. Сейфуллина
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

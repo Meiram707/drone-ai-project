@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Этап 4. Обнаружение объектов</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="5" cy="5" r="2.4" stroke="#E8D08A" stroke-width="1.4"/><circle cx="19" cy="5" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <circle cx="5" cy="19" r="2.4" stroke="#E8D08A" stroke-width="1.4"/><circle cx="19" cy="19" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="6.6" y1="6.6" x2="10.3" y2="10.3" stroke="#E8D08A" stroke-width="1.4"/><line x1="17.4" y1="6.6" x2="13.7" y2="10.3" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="6.6" y1="17.4" x2="10.3" y2="13.7" stroke="#E8D08A" stroke-width="1.4"/><line x1="17.4" y1="17.4" x2="13.7" y2="13.7" stroke="#E8D08A" stroke-width="1.4"/>
+        <rect x="10" y="10" width="4" height="4" rx="0.6" fill="#E8D08A"/>
+      </svg>
+      <span class="brand-text">Проектирование интеллектуальных систем управления<small>БПЛА-мониторинг пшеничного поля · ИИ</small></span>
+    </a>
+    <span class="header-tag">Этап 4 из 7</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <nav class="stepper" aria-label="Этапы">
+    <ul class="stepper-track">
+      <li><a href="etap1.html"><span class="step-dot">1</span>Данные</a></li>
+      <li><a href="etap2.html"><span class="step-dot">2</span>Траектория</a></li>
+      <li><a href="etap3.html"><span class="step-dot">3</span>Полёт</a></li>
+      <li><a href="etap4.html"><span class="step-dot">4</span>Объекты</a></li>
+      <li><a href="etap5.html"><span class="step-dot">5</span>Карта</a></li>
+      <li><a href="etap6.html"><span class="step-dot">6</span>Координаты</a></li>
+      <li><a href="etap7.html"><span class="step-dot">7</span>Решения</a></li>
+    </ul>
+  </nav>
+
+  <h1>Этап 4. Обнаружение объектов</h1>
+  <p class="lead">Пока дрон летит, ему нужно распознавать, что находится под ним — сами посевы, препятствия или аномальные участки.</p>
+
+  
+  <div class="panel">
+    <h2>Что делает этот этап</h2>
+    <ul class="tasklist">
+      <li>Распознавание объектов с помощью камеры — выделение объектов в кадре в реальном времени.</li>
+      <li>Применение нейронной сети <strong>YOLOv8</strong> — быстрая детекция объектов по видеопотоку.</li>
+      <li>Определение координат найденного объекта относительно дрона и карты.</li>
+      <li>Поиск препятствий и их обнаружение — опоры, постройки, другие дроны.</li>
+    </ul>
+  </div>
+  <div class="panel gold">
+    <h2>Почему именно YOLOv8</h2>
+    <p>YOLOv8 обрабатывает кадр целиком за один проход сети, что даёт скорость, достаточную для работы на борту дрона в реальном времени, а не только при постобработке на земле.</p>
+  </div>
+  <div class="panel soil">
+    <h2>На пшеничном поле</h2>
+    <p>Здесь YOLOv8 используется прежде всего для двух задач: находить препятствия на пути (Этап 3) и выделять границы участков с визуально подозрительной растительностью — их координаты передаются на Этап 7 для расчёта NDVI.</p>
+  </div>
+  
+
+  <div class="stage-nav">
+    <a href="etap3.html"><span class="lbl">Назад</span>← Этап 3. Управление полётом</a>
+    <a href="etap5.html"><span class="lbl">Далее</span>Этап 5. Построение карты →</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">Ержанов Мейрам, группа 25-16 · Kazakh Agrotechnical University им. С. Сейфуллина</div>
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

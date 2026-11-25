@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Этап 7. Принятие решений</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="5" cy="5" r="2.4" stroke="#E8D08A" stroke-width="1.4"/><circle cx="19" cy="5" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <circle cx="5" cy="19" r="2.4" stroke="#E8D08A" stroke-width="1.4"/><circle cx="19" cy="19" r="2.4" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="6.6" y1="6.6" x2="10.3" y2="10.3" stroke="#E8D08A" stroke-width="1.4"/><line x1="17.4" y1="6.6" x2="13.7" y2="10.3" stroke="#E8D08A" stroke-width="1.4"/>
+        <line x1="6.6" y1="17.4" x2="10.3" y2="13.7" stroke="#E8D08A" stroke-width="1.4"/><line x1="17.4" y1="17.4" x2="13.7" y2="13.7" stroke="#E8D08A" stroke-width="1.4"/>
+        <rect x="10" y="10" width="4" height="4" rx="0.6" fill="#E8D08A"/>
+      </svg>
+      <span class="brand-text">Проектирование интеллектуальных систем управления<small>БПЛА-мониторинг пшеничного поля · ИИ</small></span>
+    </a>
+    <span class="header-tag">Этап 7 из 7</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <nav class="stepper" aria-label="Этапы">
+    <ul class="stepper-track">
+      <li><a href="etap1.html"><span class="step-dot">1</span>Данные</a></li>
+      <li><a href="etap2.html"><span class="step-dot">2</span>Траектория</a></li>
+      <li><a href="etap3.html"><span class="step-dot">3</span>Полёт</a></li>
+      <li><a href="etap4.html"><span class="step-dot">4</span>Объекты</a></li>
+      <li><a href="etap5.html"><span class="step-dot">5</span>Карта</a></li>
+      <li><a href="etap6.html"><span class="step-dot">6</span>Координаты</a></li>
+      <li><a href="etap7.html"><span class="step-dot">7</span>Решения</a></li>
+    </ul>
+  </nav>
+
+  <h1>Этап 7. Принятие решений</h1>
+  <p class="lead">Финальный этап объединяет всё собранное раньше: по блок-схеме система решает, что делать с текущим кадром, и отдельно — нужно ли переснять участок по индексу NDVI.</p>
+
+  <h2>Алгоритм работы (блок-схема)</h2>
+  <p>Основной цикл обработки одного кадра с камеры:</p>
+  <ol class="flow-list">
+    <li>Запуск потока с камеры.</li>
+    <li>Получение кадра с камеры.</li>
+    <li class="branch">Если кадр не получен — <code>continue</code>, переход к получению следующего кадра.</li>
+    <li>Обнаружение объектов (<code>detect</code>) — см. Этап 4.</li>
+    <li>Проверка аномалий текстуры на кадре.</li>
+    <li>Получение координат GPS (<code>get_gps_coords</code>).</li>
+    <li class="branch">Если объекты или аномалии не найдены — цикл возвращается к получению следующего кадра.</li>
+    <li>Если найдены — формирование сообщения, затем отправка сообщения и/или управление объектом.</li>
+  </ol>
+
+  <p>Параллельно работает цикл адаптивного принятия решений:</p>
+  <ol class="flow-list">
+    <li>Анализ данных нейронной сетью CNN–LSTM + EKF.</li>
+    <li class="branch">Если сеть определяет значимое отклонение — принятие решения на основе ИИ.</li>
+    <li>Адаптивное управление БПЛА по принятому решению.</li>
+    <li>Обратная связь с датчиков дрона.</li>
+    <li>Адаптивное управление корректируется и цикл повторяется.</li>
+  </ol>
+
+  <h2>Расчёт NDVI (рисунок 3)</h2>
+  <p>
+    Для оценки состояния посевов система использует вегетационный индекс
+    <strong>NDVI = (NIR − Red) / (NIR + Red)</strong>, где Red и NIR — доля
+    отражённого света в красном и ближнем инфракрасном диапазоне с
+    мультиспектральной камеры дрона. Здоровые растения сильно отражают NIR
+    и слабо — Red, поэтому у них NDVI высокий; у стрессовой или отсутствующей
+    растительности NDVI заметно ниже.
+  </p>
+
+  <div class="ndvi-box">
+    <h3>Калькулятор NDVI — пшеничное поле, Акмолинская область</h3>
+    <div class="ndvi-presets">
+      <button class="btn" data-preset="healthy">Здоровый участок</button>
+      <button class="btn" data-preset="moderate">Умеренный стресс</button>
+      <button class="btn" data-preset="severe">Сильный стресс / голая почва</button>
+    </div>
+    <div class="ndvi-grid">
+      <div class="ndvi-field">
+        <label for="red-input">Red — отражение в красном канале (0–1)</label>
+        <input id="red-input" type="number" step="0.01" min="0" max="1" value="0.08">
+      </div>
+      <div class="ndvi-field">
+        <label for="nir-input">NIR — отражение в ближнем ИК (0–1)</label>
+        <input id="nir-input" type="number" step="0.01" min="0" max="1" value="0.52">
+      </div>
+    </div>
+    <button class="btn primary" id="calc-btn">Рассчитать NDVI</button>
+
+    <div class="ndvi-result">
+      <span class="value" id="ndvi-value">—</span>
+      <span class="status" id="ndvi-status"></span>
+      <div class="ndvi-bar"><div class="marker" id="ndvi-marker"></div></div>
+      <p id="ndvi-decision" style="margin-top:12px;font-size:.85rem;"></p>
+    </div>
+  </div>
+
+  <h2>Итоги работы системы</h2>
+  <p>По итогам прохождения всех этапов для обследованного участка пшеничного поля система формирует четыре результата:</p>
+  <div class="results-grid">
+    <div class="result-card">
+      <h3>Прогнозирование</h3>
+      <p>Оценка динамики NDVI и вероятного развития стресса растительности на ближайшие дни.</p>
+    </div>
+    <div class="result-card">
+      <h3>Результаты обучения</h3>
+      <p>Качество работы моделей (YOLOv8, CNN–LSTM) на тестовых кадрах этого участка.</p>
+    </div>
+    <div class="result-card">
+      <h3>Завершённая карта</h3>
+      <p>2D/3D карта поля с траекторией дрона, препятствиями и зонами низкого NDVI.</p>
+    </div>
+    <div class="result-card">
+      <h3>Движение дрона</h3>
+      <p>Фактически пройденный маршрут в сравнении с маршрутом, рассчитанным на Этапе 2.</p>
+    </div>
+  </div>
+
+  <div class="stage-nav">
+    <a href="etap6.html"><span class="lbl">Назад</span>← Этап 6. Изменение координат</a>
+    <a href="index.html"><span class="lbl">Далее</span>На главную →</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">Ержанов Мейрам, группа 25-16 · Kazakh Agrotechnical University им. С. Сейфуллина</div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/ndvi.js"></script>
+</body>
+</html>
